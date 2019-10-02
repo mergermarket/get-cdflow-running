@@ -21,7 +21,6 @@ jobs:
         curl -o cdflow https://raw.githubusercontent.com/mergermarket/cdflow/master/cdflow.py
         chmod +x cdflow
         sudo mv cdflow /usr/local/bin/cdflow
-        sudo pip install docker boto3 PyYAML dockerpty
 
     - name: run cdflow
       env:
