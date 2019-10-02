@@ -43,6 +43,8 @@ jobs:
         sudo pip install docker boto3 PyYAML dockerpty
 
     - name: run cdflow
+      env:
+        CDFLOW_IMAGE_ID: mergermarket/cdflow-commands:latest 
       run:
-        CDFLOW_IMAGE_ID-mergermarket:cdflow-commands-latest cdflow --help
+        cdflow --help
 
