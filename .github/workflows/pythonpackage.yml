@@ -14,7 +14,7 @@ jobs:
     - name: install cdflow
       run: |
         pip install cdflow
-        cdflow --help
+        sudo find / -name cdflow
         # curl -o cdflow https://raw.githubusercontent.com/mergermarket/cdflow/master/cdflow.py
         # chmod +x cdflow
         # sudo mv cdflow /usr/local/bin/cdflow
