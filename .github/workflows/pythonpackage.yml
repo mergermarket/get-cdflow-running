@@ -20,7 +20,7 @@ jobs:
     #     docker images
 
     - name: install cdflow
-      uses: docker://mergermarket/cdflow-commands
+      # uses: docker://mergermarket/cdflow-commands
       run: |
         curl -o cdflow https://raw.githubusercontent.com/mergermarket/cdflow/master/cdflow.py
         chmod +x cdflow
