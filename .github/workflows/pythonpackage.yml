@@ -12,22 +12,6 @@ jobs:
         python-version: [2.7, 3.5, 3.6, 3.7]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Lint with flake8
-      run: |
-        pip install flake8
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Get cdflow-commands
       run: |
         docker pull mergermarket/cdflow-commands
@@ -40,11 +24,11 @@ jobs:
         curl -o cdflow https://raw.githubusercontent.com/mergermarket/cdflow/master/cdflow.py
         chmod +x cdflow
         sudo mv cdflow /usr/local/bin/cdflow
-        sudo pip install docker boto3 PyYAML dockerpty
 
     - name: run cdflow
       env:
         CDFLOW_IMAGE_ID: mergermarket/cdflow-commands:latest 
       run:
+        sudo pip install docker boto3 PyYAML dockerpty
         cdflow --help
 
