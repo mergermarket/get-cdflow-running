@@ -18,14 +18,15 @@ jobs:
     - name: install cdflow
       run: |
         pip install cdflow
+        cdflow --help
         # curl -o cdflow https://raw.githubusercontent.com/mergermarket/cdflow/master/cdflow.py
         # chmod +x cdflow
         # sudo mv cdflow /usr/local/bin/cdflow
 
-    - name: run cdflow
-      env:
-        CDFLOW_IMAGE_ID: mergermarket/cdflow-commands:latest 
-      run: |
-        sudo pip install docker boto3 PyYAML dockerpty
-        cdflow --help
+    # - name: run cdflow
+    #   env:
+    #     CDFLOW_IMAGE_ID: mergermarket/cdflow-commands:latest 
+    #   run: |
+    #     sudo pip install docker boto3 PyYAML dockerpty
+    #     cdflow --help
 
