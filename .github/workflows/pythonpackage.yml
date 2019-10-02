@@ -6,29 +6,32 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [2.7, 3.5, 3.6, 3.7]
+    # strategy:
+    #   max-parallel: 4
+    #   matrix:
+    #     python-version: [2.7, 3.5, 3.6, 3.7]
 
     steps:
-    - name: Get cdflow-commands
-      run: |
-        docker pull mergermarket/cdflow-commands
-    - name: What images
-      run: |
-        docker images
+    # - name: Get cdflow-commands
+    #   run: |
+    #     docker pull mergermarket/cdflow-commands
+    # - name: What images
+    #   run: |
+    #     docker images
 
     - name: install cdflow
+      uses: docker://mergermarket/cdflow-commands
       run: |
         curl -o cdflow https://raw.githubusercontent.com/mergermarket/cdflow/master/cdflow.py
         chmod +x cdflow
         sudo mv cdflow /usr/local/bin/cdflow
-
-    - name: run cdflow
-      env:
-        CDFLOW_IMAGE_ID: mergermarket/cdflow-commands:latest 
-      run:
         sudo pip install docker boto3 PyYAML dockerpty
-        cdflow --help
+        cdflow --help        
+
+    # - name: run cdflow
+    #   env:
+    #     CDFLOW_IMAGE_ID: mergermarket/cdflow-commands:latest 
+    #   run:
+    #     sudo pip install docker boto3 PyYAML dockerpty
+    #     cdflow --help
 
