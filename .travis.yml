@@ -16,5 +16,4 @@ before_script:
 - pip install cdflow
 
 script:
-- cdflow release --platform-config ./platform-config 1-keir -v
-- cdflow deploy aslive 1-keir -p
+- aws s3 ls
