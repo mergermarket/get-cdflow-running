@@ -6,6 +6,9 @@ services:
 before_install:
 - docker pull mergermarket/cdflow-commands
 
-script:
+before_script:
+- git checkout git@github.com:mergermarket/svcs-platform-config.git platform-config
 - pip install cdflow
+
+script:
 - cdflow --help
