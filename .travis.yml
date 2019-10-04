@@ -13,7 +13,7 @@ before_install:
 
 before_script:
 - sudo apt-get update
-- sudo apt-get install aws-cli
+- sudo apt-get install awscli
 - git clone https://github.com/mergermarket/test-platform-config.git platform-config
 - pip install cdflow
 
