@@ -10,5 +10,11 @@ before_script:
 - git clone https://github.com/mergermarket/test-platform-config.git platform-config
 - pip install cdflow
 
-script:
-- cdflow --help
+jobs:
+  include:
+    - stage: release
+      script:
+      - cdflow release --platform-config ./platform-config 1-keir -v
+    - stage: deploy plan
+      script:
+      - cdflow deploy aslive 1-keir -p
