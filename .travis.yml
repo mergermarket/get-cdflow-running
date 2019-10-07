@@ -9,7 +9,7 @@ before_install:
 - docker pull mergermarket/cdflow-commands
 before_script:
 - git clone https://github.com/mergermarket/test-platform-config.git platform-config
-- pip install cdflow
+- pip install cdflow2
 script:
 - cdflow release --platform-config ./platform-config 1-keir -v
 notifications:
