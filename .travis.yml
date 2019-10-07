@@ -14,7 +14,5 @@ script:
 - cdflow release --platform-config ./platform-config 1-keir -v
 notifications:
   slack:
-    on_success: always
-    on_failure: always
     rooms:
       secure: qD81AuBcVp4BQAHMpXRs4vTv8/DkhgwHkJuA2s/PyVRWq6Nc8ZDjZj51U0HFVbqXFulbhLDuU6YMjRwCGyfLR59uMmF4GkxvhNDEcpyUo15Xj0OgsD1NEMOW+AqGo9EIa0abzr5Nwbx+9jK802eHBbnKn95BNq9tGwJoxVukd8BuZA5Bul1kKWVdvi2dypYMpLsEpaezvzFxMVGc3Ibf/3Scu65KZG+UuCl7Pn7nqeFPTjkN8ZVF/ArpMXNWLQusj8ALbvQd4K1KyFtJIo+rIQPKCLqVa8wTZXLadRXdeJu+jilW5PmYLAs4JzfBPzRRLxxmc087m1plKtoRq5/1SO4RZa3Twrhpohjwdgw7uWCsH4ifoio74HMQ3H09yrPnZQgozXsdqu882mhdnY+hCiv6KeATZSAerEJR4my+NoPLfbdV5/K2m9q6kDbsTxs6jsnwo4QcEjTnGM8cmhpZ76KfgPEelgKZeCdlC6X1/bIPMJV+UBlstX9FsRgksw+5Ebhs7PRdBhq7OxLUDkKLfvwgtOhVwFQv+HXnNklWSL+ygYy7/FGGYxKA8JW88W2TNUF9qoDH5sjFmwVzBVA5mzKM6U2xUt2iaFPfgS4xxSzCOtyNj6+mQK8GIheggrQZp97vXWnKCLxiahVGcOzAC0zciFDREaMfxoQMVN78/6o=
