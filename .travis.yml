@@ -9,10 +9,11 @@ before_install:
 - docker pull mergermarket/cdflow-commands
 before_script:
 - git clone https://github.com/mergermarket/test-platform-config.git platform-config
-- pip install cdflow2
+- pip install cdflow
 script:
 - cdflow release --platform-config ./platform-config 1-keir -v
 notifications:
+  email: false
   slack:
     rooms:
       secure: gDcheCpLzcElK6b20WG/R8VYwrZdaKPkPkaQdlpRe/t2gjBZU3EdaXlVQeq5RYx/V9SIM3Lq9PIsYltpnDibuoww5OGS+plYs2XYiXiAFoBZWia1ahZgqjIGjREkVDjh2fC2Q4b2tUUMBZ5WkMHmwGKhjPM4RNCDsZcC70062Jj1nola63MblJw3eD2oLWt9DkIPBup+7M1/14qw5w3sHaJFPhC0mC/aVN+1zZO1b3l+1wJ5CxWvfs2fwswT6o603DGsrfnn6bzZo7efQE0WwLdPvmCAD6lO91uQ6Q0vpTzkHUW6WiR8kWLGlj+plLabMTF+ug9MGqr++2DOtro6AEF7TbxxieUcDD57eXSuYfjULSoybPCuCYehzImwkN26ZW3JsBZHyUg337VA8jZKqDZTwk4WfLaz0oZKbjD4IuzdcmZcLE/18OivFn3EAzlm1I70wqaK4Fb8+BoATlVn0GvqPseuhOVVtwNMje9wwIu6e9NlGX/xlXQu/13PpSBMVbr/DwfetxJdMRw7dtzriFw9ijnUri7DqvsQgKf4ztfkXdck8L9Hf3jOdPOBRz80YZIDa2zygQSTp9WglYM2XfSiHC5DRJ/flUiTmQ9epkvzJMQ7jiGbOrG2wNp4VzGy5MyltjsP7rggJOaOInG83A+jzHYLBi+IaW9jm3sIqTs=
