@@ -1,3 +1,3 @@
-account-scheme-url: s3://svcs-account-resources/account-scheme.json
+account-scheme-url: s3://acuris-account-schemes/svcs.json
 type: infrastructure
 team: platform
