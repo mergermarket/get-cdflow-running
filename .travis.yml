@@ -17,3 +17,8 @@ before_script:
 
 script:
 - cdflow release --platform-config ./platform-config 1-keir -v
+
+notifications:
+  slack:
+    on_success: always
+    on_failure: always
