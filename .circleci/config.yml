@@ -16,6 +16,7 @@ jobs:
           command: |
             env
             aws s3 ls
+            env
             
 workflows:
   version: 2
