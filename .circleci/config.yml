@@ -9,11 +9,11 @@ jobs:
     steps:
       - run: 
           name: Get cdflow
-          command: pip install cdflow
+          command: pip install cdflow awscli
       - checkout
       - run:
           name: Run Release 
-          command: env
+          command: aws s3 ls
             
 workflows:
   version: 2
