@@ -4,13 +4,24 @@ jobs:
     docker:
       - image: python
     steps:
-      - checkout 
       - run: 
           name: Get cdflow
           command: pip install cdflow
+  release:
+    machine: 
+      image: circleci/classic:201708-01
+    steps:
+      - checkout
+      - run:
+          name: Run Release 
+          command: cdflow --help
+            
 workflows:
   version: 2
   cdflow:
     jobs:
       - get_cdflow:
+      - release:
+          requires:
+            -  get_cdflow
           context: DevTeam-Platform
