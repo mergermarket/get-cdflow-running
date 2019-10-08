@@ -1,6 +1,8 @@
 version: 2
 jobs:
   get_cdflow:
+    docker:
+      - image: python3
     steps:
       - checkout 
       - run: 
