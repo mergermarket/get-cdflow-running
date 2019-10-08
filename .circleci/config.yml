@@ -1,15 +1,15 @@
 version: 2
 jobs:
   get_cdflow:
-    docker:
-      - image: python
+    machine: 
+      image: circleci/classic:201708-01
     steps:
       - run: 
           name: Get cdflow
           command: pip install cdflow
   do_release:
-    docker:
-      - image: python
+    machine: 
+      image: circleci/classic:201708-01
     steps:
       - checkout
       - run:
