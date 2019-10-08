@@ -1,9 +1,6 @@
 version: 2
 jobs:
   get_cdflow:
-    docker: 
-      - image: mergermarket/cdflow-commands
-      - image: python
     steps:
       - checkout 
       - run: 
