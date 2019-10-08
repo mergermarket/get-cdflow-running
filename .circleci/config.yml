@@ -7,7 +7,7 @@ jobs:
       - run: 
           name: Get cdflow
           command: pip install cdflow
-  release:
+  do_release:
     machine: 
       image: circleci/classic:201708-01
     steps:
@@ -20,8 +20,8 @@ workflows:
   version: 2
   cdflow:
     jobs:
-      - get_cdflow:
-      - release:
+      - get_cdflow
+      - do_release:
           requires:
             -  get_cdflow
           context: DevTeam-Platform
