@@ -1,5 +1,8 @@
 version: 2
 jobs:
+environment:
+  - AWS_ACCESS_KEY_ID = $AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY = $AWS_SECRET_ACCESS_KEY
   get_cdflow:
     machine: 
       image: circleci/classic:201708-01
@@ -10,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Run Release 
-          command: cdflow --help
+          command: env
             
 workflows:
   version: 2
