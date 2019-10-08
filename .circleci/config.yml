@@ -3,9 +3,6 @@ jobs:
   get_cdflow:
     machine: 
       image: circleci/classic:201708-01
-    environment:
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     steps:
       - run: 
           name: Get cdflow
