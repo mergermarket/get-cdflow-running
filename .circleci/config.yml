@@ -8,8 +8,8 @@ jobs:
           name: Get cdflow
           command: pip install cdflow
   do_release:
-    machine: 
-      image: circleci/classic:201708-01
+    docker:
+      - image: python
     steps:
       - checkout
       - run:
