@@ -9,6 +9,6 @@ jobs:
         - run: echo "hello world" # run the `echo` command
 workflows:
   version: 2
-  build:
+  build_only:
     jobs:
       - build
