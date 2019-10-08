@@ -8,7 +8,9 @@ jobs:
           name: Get cdflow
           command: pip install cdflow awscli
       - checkout
-      - git clone https://github.com/mergermarket/test-platform-config.git platform-config
+      - run:
+          name: Get Platform Config
+          command: git clone https://github.com/mergermarket/test-platform-config.git platform-config
       - run:
           name: Run Release 
           command: |
