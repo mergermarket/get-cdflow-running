@@ -19,15 +19,15 @@ jobs:
             sudo find / -type d -name site-packages
             # export WORKON_HOME=~/.venvs
             # pipenv install cdflow
-            # pipenv run cdflow --help
+            cdflow --help
       - run:
           name: Get Platform Config
           command: |
             git clone https://github.com/mergermarket/test-platform-config.git platform-config
       - save_cache:
           paths:
-            - ~/.venvs
-          key: pip-packages-v2-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
+            - /opt/circleci/.pyenv/versions/3.5.2/
+          key: pip-packages-v3-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
 
   run_cdflow:
     executor: my-exec
@@ -35,12 +35,12 @@ jobs:
       - restore_cache:
           keys:
             # when lock file changes, use increasingly general patterns to restore cache
-            - pip-packages-v2-{{ .Branch }}-
-            - pip-packages-v2-
+            - pip-packages-v3-{{ .Branch }}-
+            - pip-packages-v3-
       - run:
           name: Run Release 
           command: |
-            pipenv run cdflow release --platform-config ./platform-config 1-keir -v 
+            cdflow release --platform-config ./platform-config 1-keir -v 
 workflows:
   version: 2.1
   cdflow:
