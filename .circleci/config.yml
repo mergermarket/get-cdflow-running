@@ -16,9 +16,6 @@ jobs:
             pyenv global 3.5.2
             python3 --version
             pip3 install cdflow
-            # export WORKON_HOME=~/.venvs
-            # pipenv install cdflow
-            find / -name cdflow
             cdflow --help
       - run:
           name: Get Platform Config
@@ -27,8 +24,9 @@ jobs:
       - save_cache:
           paths:
             - /opt/circleci/.pyenv/versions/3.5.2/
+            - /opt/circleci/.pyenv/shims/cdflow
             - /usr/local/bin/cdflow
-          key: pip-packages-v4-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
+          key: pip-packages-v5-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
 
   run_cdflow:
     executor: my-exec
@@ -36,16 +34,12 @@ jobs:
       - restore_cache:
           keys:
             # when lock file changes, use increasingly general patterns to restore cache
-            - pip-packages-v4-{{ .Branch }}-
-            - pip-packages-v4-
+            - pip-packages-v5-{{ .Branch }}-
+            - pip-packages-v5-
       - run:
           name: Run Release 
           command: |
             pyenv global 3.5.2
-            pip list 
-            ls -l /usr/local/bin/c*
-            echo "------------"
-            ls -l
             cdflow release --platform-config ./platform-config 1-keir -v 
 workflows:
   version: 2.1
