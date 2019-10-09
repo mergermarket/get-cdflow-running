@@ -27,7 +27,8 @@ jobs:
       - save_cache:
           paths:
             - /opt/circleci/.pyenv/versions/3.5.2/
-          key: pip-packages-v3-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
+            - /usr/local/bin/cdflow
+          key: pip-packages-v4-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
 
   run_cdflow:
     executor: my-exec
@@ -35,8 +36,8 @@ jobs:
       - restore_cache:
           keys:
             # when lock file changes, use increasingly general patterns to restore cache
-            - pip-packages-v3-{{ .Branch }}-
-            - pip-packages-v3-
+            - pip-packages-v4-{{ .Branch }}-
+            - pip-packages-v4-
       - run:
           name: Run Release 
           command: |
