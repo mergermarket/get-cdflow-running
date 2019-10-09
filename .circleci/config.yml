@@ -8,12 +8,6 @@ jobs:
   get_cdflow:
     executor: my-exec
     steps:
-      - restore_cache:
-          keys:
-            # when lock file changes, use increasingly general patterns to restore cache
-            - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-            - pip-packages-v1-{{ .Branch }}-
-            - pip-packages-v1-
       - run: 
           name: Get cdflow
           command: |
@@ -27,6 +21,8 @@ jobs:
       - run:
           name: Get Platform Config
           command: |
+            ls -l
+            find .
             rm -rf platform-config
             git clone https://github.com/mergermarket/test-platform-config.git platform-config
       - save_cache:
