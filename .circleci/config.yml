@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Run Deploy
           command: |
-            cdflow deploy aslive 1-keir -v -p
+            cdflow deploy aslive 1-keir -v 
 workflows:
   version: 2
   cdflow:
