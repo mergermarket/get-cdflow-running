@@ -35,4 +35,5 @@ workflows:
       - run_cdflow:
           type: approval
           context: DevTeam-Platform
-          requires: get_cdflow
+          requires: 
+            - get_cdflow
