@@ -16,6 +16,7 @@ jobs:
           command: |
             cdflow release --platform-config ./platform-config 1-keir -v 
       - run:
+          type: approval
           name: Run Deploy
           command: |
             cdflow deploy aslive 1-keir -v 
