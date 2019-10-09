@@ -15,22 +15,19 @@ jobs:
             python --version
             pip install pipenv
             export WORKON_HOME=~/.venvs
-            pipenv install cdflow
-            pwd
-            ls -l
-            find .
+            pipenv install cdflow awscli
+            cdflow --help
       - run:
           name: Get Platform Config
           command: |
-            ls -l
-            find .
-            rm -rf platform-config
             git clone https://github.com/mergermarket/test-platform-config.git platform-config
       - save_cache:
           paths:
             - ~/.venvs
             - /usr/local/bin/cdflow
-          key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
+          key: 
+            - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
+            - pip-packages-v1-{{ .Branch }}-
 
   run_cdflow:
     executor: my-exec
