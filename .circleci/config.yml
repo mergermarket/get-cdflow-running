@@ -2,7 +2,7 @@ version: 2
 jobs:
   get_cdflow:
     machine: 
-      image: circleci/classic:201708-01
+      image: circleci/classic:latest
     steps:
       - run: 
           name: Get cdflow
@@ -16,7 +16,6 @@ jobs:
           command: |
             cdflow release --platform-config ./platform-config 1-keir -v 
       - run:
-          type: approval
           name: Run Deploy
           command: |
             cdflow deploy aslive 1-keir -v 
