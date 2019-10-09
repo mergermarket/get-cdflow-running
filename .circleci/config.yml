@@ -3,7 +3,7 @@ version: 2.1
 executors:
   my-exec:
     machine: 
-      - image: circleci/classic:latest
+      image: circleci/classic:latest
 jobs:
   get_cdflow:
     executor: my-exec
