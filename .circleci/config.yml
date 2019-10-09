@@ -31,7 +31,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.venvs
-            - /usr/local/bin/cdflow.
+            - /usr/local/bin/cdflow*
           key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
 
   run_cdflow:
