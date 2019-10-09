@@ -25,9 +25,8 @@ jobs:
           paths:
             - ~/.venvs
             - /usr/local/bin/cdflow
-          keys: 
+          key: 
             - pip-packages-v2-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
-            - pip-packages-v2-{{ .Branch }}-
 
   run_cdflow:
     executor: my-exec
