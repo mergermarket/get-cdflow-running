@@ -1,12 +1,12 @@
 version: 2
 
 executors:
-  my_exec:
+  my-exec:
     machine: 
       - image: circleci/classic:latest
 jobs:
   get_cdflow:
-    executor: my_exec
+    executor: my-exec
     steps:
       - run: 
           name: Get cdflow
@@ -20,7 +20,7 @@ jobs:
           command: git clone https://github.com/mergermarket/test-platform-config.git platform-config
 
   run_cdflow:
-    executor: my_exec
+    executor: my-exec
     steps:
       - run:
           name: Run Release 
