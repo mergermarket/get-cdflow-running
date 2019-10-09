@@ -1,8 +1,12 @@
 version: 2
-jobs:
-  get_cdflow:
+
+executors:
+  my_exec:
     machine: 
       image: circleci/classic:latest
+jobs:
+  get_cdflow:
+    executor: my_exec
     steps:
       - run: 
           name: Get cdflow
@@ -14,10 +18,9 @@ jobs:
       - run:
           name: Get Platform Config
           command: git clone https://github.com/mergermarket/test-platform-config.git platform-config
-          
+
   run_cdflow:
-    machine: 
-      image: circleci/classic:latest
+    executor: my_exec
     steps:
       - run:
           name: Run Release 
