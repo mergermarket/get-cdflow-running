@@ -40,6 +40,7 @@ jobs:
       - run:
           name: Run Release 
           command: |
+            pyenv global 3.5.2
             pip list 
             ls -l /usr/local/bin/c*
             echo "------------"
