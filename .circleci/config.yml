@@ -33,7 +33,6 @@ workflows:
       - get_cdflow:
           context: DevTeam-Platform
       - run_cdflow:
-          type: approval
           context: DevTeam-Platform
           requires: 
             - get_cdflow
