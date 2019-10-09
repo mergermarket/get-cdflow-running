@@ -8,6 +8,12 @@ jobs:
   get_cdflow:
     executor: my-exec
     steps:
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+            - pip-packages-v1-{{ .Branch }}-
+            - pip-packages-v1-
       - run: 
           name: Get cdflow
           command: |
@@ -20,11 +26,23 @@ jobs:
       - checkout
       - run:
           name: Get Platform Config
-          command: git clone https://github.com/mergermarket/test-platform-config.git platform-config
+          command: |
+            rm -rf platform-config
+            git clone https://github.com/mergermarket/test-platform-config.git platform-config
+      - save_cache:
+          paths:
+            - ~/.venvs
+          key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
 
   run_cdflow:
     executor: my-exec
     steps:
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+            - pip-packages-v1-{{ .Branch }}-
+            - pip-packages-v1-
       - run:
           name: Run Release 
           command: |
@@ -35,7 +53,7 @@ workflows:
     jobs:
       - get_cdflow:
           context: DevTeam-Platform
-      # - run_cdflow:
-      #     context: DevTeam-Platform
-      #     requires: 
-      #       - get_cdflow
+      - run_cdflow:
+          context: DevTeam-Platform
+          requires: 
+            - get_cdflow
