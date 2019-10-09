@@ -18,6 +18,7 @@ jobs:
             pip3 install cdflow
             # export WORKON_HOME=~/.venvs
             # pipenv install cdflow
+            find / -name cdflow
             cdflow --help
       - run:
           name: Get Platform Config
