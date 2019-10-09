@@ -15,6 +15,10 @@ jobs:
           name: Run Release 
           command: |
             cdflow release --platform-config ./platform-config 1-keir -v 
+      - run:
+          name: Run Deploy
+          command: |
+            cdflow deploy aslive 1-keir -v -p
 workflows:
   version: 2
   cdflow:
