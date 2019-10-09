@@ -14,17 +14,20 @@ jobs:
       - run:
           name: Get Platform Config
           command: git clone https://github.com/mergermarket/test-platform-config.git platform-config
+          
+  run_cdflow:
+    machine: 
+      image: circleci/classic:latest
+    steps:
       - run:
           name: Run Release 
           command: |
             cdflow release --platform-config ./platform-config 1-keir -v 
-      - run:
-          name: Run Deploy
-          command: |
-            cdflow deploy aslive 1-keir -v 
 workflows:
   version: 2
   cdflow:
     jobs:
       - get_cdflow:
+          context: DevTeam-Platform
+      - run_cdflow:
           context: DevTeam-Platform
