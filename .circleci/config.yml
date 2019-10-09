@@ -8,6 +8,7 @@ jobs:
   get_cdflow:
     executor: my-exec
     steps:
+      - checkout
       - run: 
           name: Get cdflow
           command: |
@@ -20,7 +21,6 @@ jobs:
             pwd
             ls -l
             find .
-      - checkout
       - run:
           name: Get Platform Config
           command: |
