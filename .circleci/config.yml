@@ -12,12 +12,10 @@ jobs:
       - run: 
           name: Get cdflow
           command: |
-            env
             python --version
             pip install pipenv
             export WORKON_HOME=~/.venvs
             pipenv install cdflow
-            env
             pwd
             ls -l
             find .
@@ -31,7 +29,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.venvs
-            - /usr/local/bin/cdflow*
+            - /usr/local/bin/cdflow
           key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
 
   run_cdflow:
