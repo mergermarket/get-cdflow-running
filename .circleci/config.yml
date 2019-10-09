@@ -14,7 +14,7 @@ jobs:
             env
             python --version
             pip install pipenv
-            pipenv install cdfloe
+            pipenv install cdflow
       - checkout
       - run:
           name: Get Platform Config
