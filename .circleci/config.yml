@@ -16,7 +16,6 @@ jobs:
             pyenv global 3.5.2
             python3 --version
             pip3 install cdflow
-            sudo find / -type d -name site-packages
             # export WORKON_HOME=~/.venvs
             # pipenv install cdflow
             cdflow --help
@@ -41,6 +40,8 @@ jobs:
       - run:
           name: Run Release 
           command: |
+            pip list 
+            ls -l /usr/local/bin/c*
             cdflow release --platform-config ./platform-config 1-keir -v 
 workflows:
   version: 2.1
