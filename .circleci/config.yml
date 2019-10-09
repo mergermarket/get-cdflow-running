@@ -17,6 +17,9 @@ jobs:
             export WORKON_HOME=~/.venvs
             pipenv install cdflow
             env
+            pwd
+            ls -l
+            find .
       - checkout
       - run:
           name: Get Platform Config
