@@ -13,7 +13,8 @@ jobs:
           command: |
             env
             python --version
-            pip install cdflow awscli
+            pip install pipenv
+            pipenv install cdfloe
       - checkout
       - run:
           name: Get Platform Config
@@ -32,7 +33,7 @@ workflows:
     jobs:
       - get_cdflow:
           context: DevTeam-Platform
-      - run_cdflow:
-          context: DevTeam-Platform
-          requires: 
-            - get_cdflow
+      # - run_cdflow:
+      #     context: DevTeam-Platform
+      #     requires: 
+      #       - get_cdflow
