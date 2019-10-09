@@ -42,6 +42,8 @@ jobs:
           command: |
             pip list 
             ls -l /usr/local/bin/c*
+            echo "------------"
+            ls -l
             cdflow release --platform-config ./platform-config 1-keir -v 
 workflows:
   version: 2.1
