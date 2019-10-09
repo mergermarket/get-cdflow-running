@@ -12,11 +12,11 @@ jobs:
       - run: 
           name: Get cdflow
           command: |
-            python --version
-            pip install pipenv
-            export WORKON_HOME=~/.venvs
-            pipenv install cdflow
-            pipenv run cdflow --help
+            python3 --version
+            pip3 install cdflow
+            # export WORKON_HOME=~/.venvs
+            # pipenv install cdflow
+            # pipenv run cdflow --help
       - run:
           name: Get Platform Config
           command: |
