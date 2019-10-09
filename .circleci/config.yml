@@ -6,7 +6,10 @@ jobs:
     steps:
       - run: 
           name: Get cdflow
-          command: pip install cdflow awscli
+          command: |
+            env
+            python --version
+            pip install cdflow awscli
       - checkout
       - run:
           name: Get Platform Config
