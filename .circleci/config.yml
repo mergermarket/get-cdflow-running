@@ -16,9 +16,7 @@ jobs:
             pip install pipenv
             export WORKON_HOME=~/.venvs
             pipenv install cdflow
-            find ~/.venvs
-            ~/.venvs/bin/activate
-            cdflow --help
+            pipenv run cdflow --help
       - run:
           name: Get Platform Config
           command: |
@@ -26,7 +24,6 @@ jobs:
       - save_cache:
           paths:
             - ~/.venvs
-            - /usr/local/bin/cdflow
           key: pip-packages-v2-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
 
   run_cdflow:
@@ -40,7 +37,7 @@ jobs:
       - run:
           name: Run Release 
           command: |
-            cdflow release --platform-config ./platform-config 1-keir -v 
+            pipenv run cdflow release --platform-config ./platform-config 1-keir -v 
 workflows:
   version: 2.1
   cdflow:
