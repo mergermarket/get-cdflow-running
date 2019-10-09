@@ -16,6 +16,7 @@ jobs:
             pip install pipenv
             export WORKON_HOME=~/.venvs
             pipenv install cdflow
+            ~/.venv/bin/activate
             cdflow --help
       - run:
           name: Get Platform Config
