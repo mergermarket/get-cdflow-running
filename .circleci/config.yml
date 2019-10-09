@@ -9,12 +9,15 @@ jobs:
     executor: my-exec
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - pip-packages-v5-{{ .Branch }}-
+            - pip-packages-v5-
       - run: 
           name: Get cdflow
           command: |
-            pyenv versions
             pyenv global 3.5.2
-            python3 --version
             pip3 install cdflow
             cdflow --help
       - run:
@@ -25,12 +28,12 @@ jobs:
           paths:
             - /opt/circleci/.pyenv/versions/3.5.2/
             - /opt/circleci/.pyenv/shims/cdflow
-            - /usr/local/bin/cdflow
           key: pip-packages-v5-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
 
   run_cdflow:
     executor: my-exec
     steps:
+      - checkout
       - restore_cache:
           keys:
             # when lock file changes, use increasingly general patterns to restore cache
