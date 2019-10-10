@@ -23,7 +23,7 @@ orbs:
           - save_cache:
               paths:
                 - /opt/circleci/.pyenv/
-              key: pip-packages-v6-{{ .Branch }}-{{ checksum "/opt/circleci/.pyenv/" }}         
+              key: pip-packages-v6-{{ .Branch }}-{{ checksum "/opt/circleci/.pyenv/shims/cdflow" }}         
       get-platform-config:
         steps:
           - run:
