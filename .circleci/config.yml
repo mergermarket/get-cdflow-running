@@ -41,7 +41,6 @@ orbs:
           - run:
               name: Run Release 
               command: |
-                pyenv global 3.5.2
                 cdflow release --platform-config ./platform-config 1-keir -v 
       plan:
         executor: cdflow-exec
@@ -51,7 +50,6 @@ orbs:
           - run:
               name: Deploy Plan
               command: |
-                pyenv global 3.5.2
                 cdflow deploy 1-keir -v -p
 
 
