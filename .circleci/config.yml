@@ -19,7 +19,6 @@ orbs:
           - run: 
               name: Get cdflow
               command: |
-                # pyenv global 3.5.2
                 pip install --upgrade cdflow
                 find /opt/circleci/.pyenv/ > /tmp/pyenv.filelist
           - save_cache:
@@ -53,7 +52,7 @@ orbs:
           - run:
               name: Run Release 
               command: |
-                cdflow release --platform-config ./platform-config 1-keir -v 
+                cdflow release --platform-config ./platform-config ${CIRCLE_BUILD_NUM}-keir -v 
       plan:
         description: Runs cdflow plan 
         executor: cdflow-exec
@@ -63,12 +62,12 @@ orbs:
           - run:
               name: Deploy Plan
               command: |
-                cdflow deploy aslive 1-keir -v -p
+                cdflow deploy aslive ${CIRCLE_BUILD_NUM}-keir -v -p
 
 
 workflows:
   version: 2.1
-  deploy:
+  test-pipeline:
     jobs:
       - cdflow/release:
           platform-config: test-platform-config
