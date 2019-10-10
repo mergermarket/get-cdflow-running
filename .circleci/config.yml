@@ -59,6 +59,9 @@ workflows:
   version: 2.1
   cdflow:
     jobs:
-      - cdflow/release
-      - cdflow/plan
+      - cdflow/release:
+          context: DevTeam-Platform
+      - cdflow/plan:
+          context: DevTeam-Platform
+    
           
