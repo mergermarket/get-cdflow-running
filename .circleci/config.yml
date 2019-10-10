@@ -23,7 +23,7 @@ orbs:
           - save_cache:
               paths:
                 - /opt/circleci/.pyenv/
-              key: pip-packages-v6-{{ .Branch }}-{{ checksum "/opt/circleci/.pyenv/shims/cdflow" }}         
+              key: pip-packages-v6-{{ .Branch }}-{{ checksum "/opt/circleci/.pyenv/" }}         
       get-platform-config:
         steps:
           - run:
@@ -49,7 +49,7 @@ orbs:
           - checkout
           - install-cdflow
           - run:
-              name: Run Release 
+              name: Deploy Plan
               command: |
                 pyenv global 3.5.2
                 cdflow deploy 1-keir -v -p
