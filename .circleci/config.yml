@@ -2,7 +2,7 @@ version: 2.1
 description: test deployment in circeci
 
 orbs:
-  cdflow: acuris/cdflow@dev:first
+  cdflow: acuris/cdflow@dev:second
 
 workflows:
   test-pipeline:
@@ -11,6 +11,7 @@ workflows:
           platform-config: test-platform-config
           context: DevTeam-Platform
       - cdflow/deploy:
+          env: aslive
           requires: 
             - cdflow/release
           context: DevTeam-Platform
