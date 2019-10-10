@@ -13,7 +13,7 @@ orbs:
           - restore_cache:
               keys:
                 # when lock file changes, use increasingly general patterns to restore cache
-                - cdflow-packages-v7-
+                - cdflow-packages-v8-
           - run: 
               name: Get cdflow
               command: |
@@ -23,7 +23,7 @@ orbs:
           - save_cache:
               paths:
                 - /opt/circleci/.pyenv/
-              key: cdflow-packages-v7-{{ checksum "/tmp/pyenv.filelist" }}
+              key: cdflow-packages-v8-{{ checksum "/tmp/pyenv.filelist" }}
       get-platform-config:
         steps:
           - run:
