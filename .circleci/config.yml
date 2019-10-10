@@ -25,9 +25,8 @@ jobs:
             git clone https://github.com/mergermarket/test-platform-config.git platform-config
       - save_cache:
           paths:
-            - /opt/circleci/.pyenv/versions/3.5.2/
-            - /opt/circleci/.pyenv/shims/cdflow
-          key: pip-packages-v6-{{ .Branch }}-{{ checksum "Pipfile.lock" }}      
+            - /opt/circleci/.pyenv/
+          key: pip-packages-v6-{{ .Branch }}-{{ checksum "/opt/circleci/.pyenv/shims/cdflow" }}      
 
   run_cdflow:
     executor: my-exec
