@@ -2,57 +2,68 @@ version: 2.1
 description: test deployment
 
 orbs:
-  cdflow: acuris/cdflow@dev:first
+  # cdflow: acuris/cdflow@dev:first
 
-  # cdflow:
-  #   executors:
-  #     cdflow-exec:
-  #       machine: 
-  #         image: circleci/classic:latest
-  #   commands:
-  #     install-cdflow:
-  #       steps:
-  #         - restore_cache:
-  #             keys:
-  #               # when lock file changes, use increasingly general patterns to restore cache
-  #               - cdflow-packages-v8-
-  #         - run: 
-  #             name: Get cdflow
-  #             command: |
-  #               # pyenv global 3.5.2
-  #               pip install --upgrade cdflow
-  #               find /opt/circleci/.pyenv/ > /tmp/pyenv.filelist
-  #         - save_cache:
-  #             paths:
-  #               - /opt/circleci/.pyenv/
-  #             key: cdflow-packages-v8-{{ checksum "/tmp/pyenv.filelist" }}
-  #     get-platform-config:
-  #       steps:
-  #         - run:
-  #             name: Get Platform Config
-  #             command: |
-  #               git clone https://github.com/mergermarket/test-platform-config.git platform-config
+  cdflow:
+    executors:
+      cdflow-exec:
+        machine: 
+          image: circleci/classic:latest
+    commands:
+      install-cdflow:
+        steps:
+          - restore_cache:
+              keys:
+                # when lock file changes, use increasingly general patterns to restore cache
+                - cdflow-packages-v8-
+          - run: 
+              name: Get cdflow
+              command: |
+                # pyenv global 3.5.2
+                pip install --upgrade cdflow
+                find /opt/circleci/.pyenv/ > /tmp/pyenv.filelist
+          - save_cache:
+              paths:
+                - /opt/circleci/.pyenv/
+              key: cdflow-packages-v8-{{ checksum "/tmp/pyenv.filelist" }}
+      get-platform-config:
+        parameters:
+          command-platform-config:
+            description: The name of your teams platform config repository 
+            type: string
+        steps:
+          - run:
+              name: Get Platform Config
+              command: |
+                git clone https://github.com/mergermarket/<< parameters.command-platform-config >>.git platform-config
     
-  #   jobs:
-  #     release:
-  #       executor: cdflow-exec
-  #       steps:
-  #         - checkout
-  #         - get-platform-config
-  #         - install-cdflow
-  #         - run:
-  #             name: Run Release 
-  #             command: |
-  #               cdflow release --platform-config ./platform-config 1-keir -v 
-  #     plan:
-  #       executor: cdflow-exec
-  #       steps:
-  #         - checkout
-  #         - install-cdflow
-  #         - run:
-  #             name: Deploy Plan
-  #             command: |
-  #               cdflow deploy aslive 1-keir -v -p
+    jobs:
+      release:
+        description: Runs cdflow release 
+        executor: cdflow-exec
+        parameters:
+          platform-config:
+            description: The name of your teams platform config repository 
+            type: string
+        steps:
+          - checkout
+          - get-platform-config:
+              command-platform-config: << parameters.platform-config >>
+          - install-cdflow
+          - run:
+              name: Run Release 
+              command: |
+                cdflow release --platform-config ./platform-config 1-keir -v 
+      plan:
+        description: Runs cdflow plan 
+        executor: cdflow-exec
+        steps:
+          - checkout
+          - install-cdflow
+          - run:
+              name: Deploy Plan
+              command: |
+                cdflow deploy aslive 1-keir -v -p
 
 
 workflows:
@@ -60,6 +71,7 @@ workflows:
   deploy:
     jobs:
       - cdflow/release:
+          platform-config: test-platform-config
           context: DevTeam-Platform
       - cdflow/plan:
           requires: 
