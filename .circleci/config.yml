@@ -23,7 +23,7 @@ orbs:
           - save_cache:
               paths:
                 - /opt/circleci/.pyenv/
-              key: cdflow-packages-v6-{{ .key }}
+              key: cdflow-packages-v6-{{ .Environment.key }}
       get-platform-config:
         steps:
           - run:
