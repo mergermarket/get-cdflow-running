@@ -62,6 +62,9 @@ workflows:
       - cdflow/release:
           context: DevTeam-Platform
       - cdflow/plan:
+          requires: 
+            - cdflow/release
           context: DevTeam-Platform
+
     
           
