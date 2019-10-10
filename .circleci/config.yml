@@ -18,7 +18,7 @@ orbs:
               name: Get cdflow
               command: |
                 # pyenv global 3.5.2
-                pip install cdflow
+                pip install --upgrade cdflow
                 find /opt/circleci/.pyenv/ > /tmp/pyenv.filelist
           - save_cache:
               paths:
