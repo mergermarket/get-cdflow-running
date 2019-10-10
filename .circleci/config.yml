@@ -1,54 +1,48 @@
 version: 2.1
+description: cdflow orb
 
-executors:
-  my-exec:
-    machine: 
-      image: circleci/classic:latest
-jobs:
-  get_cdflow:
-    executor: my-exec
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            # when lock file changes, use increasingly general patterns to restore cache
-            - pip-packages-v6-{{ .Branch }}-
-            - pip-packages-v6-
-      - run: 
-          name: Get cdflow
-          command: |
-            pyenv global 3.5.2
-            pip3 install cdflow
-      - run:
-          name: Get Platform Config
-          command: |
-            git clone https://github.com/mergermarket/test-platform-config.git platform-config
-      - save_cache:
-          paths:
-            - /opt/circleci/.pyenv/
-          key: pip-packages-v6-{{ .Branch }}-{{ checksum "/opt/circleci/.pyenv/shims/cdflow" }}      
+orbs:
+  cdflow:
+    executors:
+      cdflow-exec:
+        machine: 
+          image: circleci/classic:latest
+    commands:
+      release-command:
+        steps:
+          - restore_cache:
+              keys:
+                # when lock file changes, use increasingly general patterns to restore cache
+                - pip-packages-v6-{{ .Branch }}-
+                - pip-packages-v6-
+          - run: 
+              name: Get cdflow
+              command: |
+                pyenv global 3.5.2
+                pip3 install cdflow
+          - run:
+              name: Get Platform Config
+              command: |
+                git clone https://github.com/mergermarket/test-platform-config.git platform-config
+          - save_cache:
+              paths:
+                - /opt/circleci/.pyenv/
+              key: pip-packages-v6-{{ .Branch }}-{{ checksum "/opt/circleci/.pyenv/shims/cdflow" }}         
+          - run:
+              name: Run Release 
+              command: |
+                pyenv global 3.5.2
+                cdflow release --platform-config ./platform-config 1-keir -v 
+    jobs:
+      release:
+          executor: cdflow-exec
+          steps:
+            - checkout
+            - release-command
 
-  run_cdflow:
-    executor: my-exec
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            # when lock file changes, use increasingly general patterns to restore cache
-            - pip-packages-v6-{{ .Branch }}-
-            - pip-packages-v6-
-      - run:
-          name: Run Release 
-          command: |
-            pyenv global 3.5.2
-            cdflow release --platform-config ./platform-config 1-keir -v 
 workflows:
   version: 2.1
   cdflow:
     jobs:
-      - get_cdflow:
-          context: DevTeam-Platform
-      - run_cdflow:
-          context: DevTeam-Platform
-          requires: 
-            - get_cdflow
+      - cdflow/release
+          
