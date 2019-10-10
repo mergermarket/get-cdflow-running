@@ -8,7 +8,7 @@ orbs:
         machine: 
           image: circleci/classic:latest
     commands:
-      release-command:
+      install-cdflow:
         steps:
           - restore_cache:
               keys:
@@ -20,29 +20,45 @@ orbs:
               command: |
                 pyenv global 3.5.2
                 pip3 install cdflow
-          - run:
-              name: Get Platform Config
-              command: |
-                git clone https://github.com/mergermarket/test-platform-config.git platform-config
           - save_cache:
               paths:
                 - /opt/circleci/.pyenv/
               key: pip-packages-v6-{{ .Branch }}-{{ checksum "/opt/circleci/.pyenv/shims/cdflow" }}         
+      get-platform-config:
+        steps:
+          - run:
+              name: Get Platform Config
+              command: |
+                git clone https://github.com/mergermarket/test-platform-config.git platform-config
+    
+    jobs:
+      release:
+        executor: cdflow-exec
+        steps:
+          - checkout
+          - get-platform-config
+          - install-cdflow
           - run:
               name: Run Release 
               command: |
                 pyenv global 3.5.2
                 cdflow release --platform-config ./platform-config 1-keir -v 
-    jobs:
-      release:
-          executor: cdflow-exec
-          steps:
-            - checkout
-            - release-command
+      plan:
+        executor: cdflow-exec
+        steps:
+          - checkout
+          - install-cdflow
+          - run:
+              name: Run Release 
+              command: |
+                pyenv global 3.5.2
+                cdflow deploy 1-keir -v -p
+
 
 workflows:
   version: 2.1
   cdflow:
     jobs:
       - cdflow/release
+      - cdflow/plan
           
