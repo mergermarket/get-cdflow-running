@@ -13,17 +13,17 @@ orbs:
           - restore_cache:
               keys:
                 # when lock file changes, use increasingly general patterns to restore cache
-                - cdflow-packages-v6-
+                - cdflow-packages-v7-
           - run: 
               name: Get cdflow
               command: |
-                pyenv global 3.5.2
+                # pyenv global 3.5.2
                 pip3 install cdflow
                 find /opt/circleci/.pyenv/ > /tmp/pyenv.filelist
           - save_cache:
               paths:
                 - /opt/circleci/.pyenv/
-              key: cdflow-packages-v6-{{ checksum "/tmp/pyenv.filelist" }}
+              key: cdflow-packages-v7-{{ checksum "/tmp/pyenv.filelist" }}
       get-platform-config:
         steps:
           - run:
