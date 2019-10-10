@@ -10,7 +10,7 @@ workflows:
       - cdflow/release:
           platform-config: test-platform-config
           context: DevTeam-Platform
-      - cdflow/plan:
+      - cdflow/deploy:
           requires: 
             - cdflow/release
           context: DevTeam-Platform
