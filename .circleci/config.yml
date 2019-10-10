@@ -52,7 +52,7 @@ orbs:
           - run:
               name: Run Release 
               command: |
-                cdflow release --platform-config ./platform-config ${CIRCLE_BUILD_NUM}-keir -v 
+                cdflow release --platform-config ./platform-config ${CIRCLE_BUILD_NUM}-$(git rev-parse --short HEAD) -v 
       plan:
         description: Runs cdflow plan 
         executor: cdflow-exec
@@ -62,7 +62,7 @@ orbs:
           - run:
               name: Deploy Plan
               command: |
-                cdflow deploy aslive ${CIRCLE_BUILD_NUM}-keir -v -p
+                cdflow deploy aslive ${CIRCLE_BUILD_NUM}-$(git rev-parse --short HEAD) -v -p
 
 
 workflows:
