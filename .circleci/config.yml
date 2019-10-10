@@ -1,5 +1,5 @@
 version: 2.1
-description: test deployment
+description: test deployment in circeci
 
 orbs:
   cdflow: acuris/cdflow@dev:first
