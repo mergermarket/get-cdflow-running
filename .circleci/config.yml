@@ -19,7 +19,7 @@ orbs:
               name: Get cdflow
               command: |
                 pyenv global 3.5.2
-                pip3 install cdflow
+                pip3 install --upgrade cdflow
           - save_cache:
               paths:
                 - /opt/circleci/.pyenv/
